@@ -2,7 +2,7 @@
 
 这个项目以 `java springboot` 为例，演示如何接入 `tronapi` 的接口服务。
 
-用户可直接引入 `lib` 文件夹下的源码文件，快速进行后续开发。
+商户可直接引入 `lib` 文件夹下的源码文件，快速进行后续开发。
 
 ## 链接
 
@@ -46,7 +46,7 @@
 ```java
   String amount = "100";
   String currency = "CNY"; // CNY or USD
-  String coinCode = "FAU"; // FAU or USDT
+  String coinCode = "USDT"; // 固定 USDT
   String orderId = "your order id";
   String productName = "your product name";
   String customerId = "your customer id";
@@ -65,48 +65,62 @@
 	JsonNode res = client.transaction.query(token);
 ```
 
+### 收款地址
+
+- 收款地址查询
+
+> 接口文档：https://doc.tronapi.com/api/address/list.html
+
+```java
+  JsonNode res = client.address.list();
+```
+
+- 收款地址添加
+
+> 接口文档：https://doc.tronapi.com/api/address/add.html
+
+```java
+  JsonNode res = client.address.add("your wallet address");
+```
+
+- 收款地址生成
+
+> 接口文档：https://doc.tronapi.com/api/address/generate.html
+
+```java
+  JsonNode res = client.address.generate();
+```
+
+- 收款地址生成 & 替换
+
+> 接口文档：https://doc.tronapi.com/api/address/generate_add.html
+
+```java
+  JsonNode res = client.address.generate_add();
+```
+
 ### 账户
 
 - 账户查询
 
-> 接口文档：https://doc.tronapi.com/api/wallet/query.html
+> 接口文档：https://doc.tronapi.com/api/account/balance.html
 
 ```java
-  JsonNode res = client.account.query();
+  JsonNode res = client.account.balance();
 ```
 
-- 提现申请
-
-> 接口文档：https://doc.tronapi.com/api/wallet/withdrawal_create.html
-
-```java
-  String amount = "200";
-  String coinCode = "FAU"; // FAU or USDT
-  String address = "your withdrawal address";
-  String notifyUrl = "your withdrawal notify url";
-
-  JsonNode res = client.account.withdrawal(amount, coinCode, address, notifyUrl);
-```
-
-- 提现查询
-
-> 接口文档：https://doc.tronapi.com/api/wallet/withdrawal_query.html
-
-```java
-  String token = "your withdrawal token";
-	JsonNode res = client.account.withdrawal_query(token);
-```
 
 ## 测试
 
 用户也可直接下载本项目进行接口调试，方法如下：
 
-- 下载项目源代码
-- 修改 `application.properties` 配置文件
-- 启动项目，浏览器访问相关路由即可
+- 下载项目源代码。
+- 修改 `application.properties` 配置文件。
+- 启动项目，浏览器访问相关路由即可。
 
-> 详细路由及接口调用方法，参考 `controller/TransactionController.java` & `controller/AccountController.java`
+> 详细路由及接口调用方法，参考 `controller/TransactionController.java` & `controller/AccountController.java` & `controller/AddressController.java`。
 
 ## 联系
 
-可通过 [官网](https://doc.tronapi.com) `右下角` 反馈功能和我们取得联系。
+- 可通过 [官网](https://doc.tronapi.com) `右下角` 反馈功能和我们取得联系。
+- telegram: jackslowfak。

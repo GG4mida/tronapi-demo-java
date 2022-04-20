@@ -8,6 +8,6 @@ public class HomeController {
 
 	@RequestMapping("/")
 	public String index() {
-		return "Hello tronapi. Please see the TransactionController.java & AccountController.java";
+		return "Hello tronapi. Please see the TransactionController.java & AddressController.java & AccountController.java";
 	}
 }

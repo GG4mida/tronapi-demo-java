@@ -3,9 +3,6 @@ package com.tronapi.tronapi.controller;
 import com.tronapi.tronapi.bean.Tronapi;
 import com.tronapi.tronapi.lib.Client;
 import com.tronapi.tronapi.lib.Helper;
-
-import java.util.Arrays;
-
 import com.fasterxml.jackson.databind.JsonNode;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,7 +29,7 @@ public class TransactionController {
 
 			String amount = "100";
 			String currency = "CNY";
-			String coinCode = "FAU";
+			String coinCode = "USDT";
 			String orderId = Helper.getRandomStr(8);
 			String productName = "product name";
 			String customerId = "customer id";
@@ -105,22 +102,12 @@ public class TransactionController {
 			Boolean resSucccess = res.get("success").asBoolean();
 			if (resSucccess == true) {
 				JsonNode resData = res.get("data");
-
-				String transStatus = resData.get("status").asText();
-				String transMessage = resData.get("message").asText();
-
-				System.out.println("trans status:" + transStatus);
-				System.out.println("trans message:" + transMessage);
-
-				// 订单状态参考：https://doc.tronapi.com/api/intro/constant.html
-				String[] transResolvedStatus = { "NORMAL_DONE", "MANUAL_DONE", "PARTIAL_DONE", "OVER_DONE",
-						"PARTIAL_OVER_DONE" };
-
-				if (Arrays.asList(transResolvedStatus).contains(transStatus)) {
-					System.out.println("Transaction has done");
+				Boolean transStatus = resData.get("status").asBoolean();
+				if(transStatus == true) {
+					System.out.println("已支付");
 				} else {
-					System.out.println("Transaction:" + transMessage);
-				}
+					System.out.println("未支付");
+				} 
 			} else {
 				String resData = res.get("data").asText();
 				System.out.println("Transaction query failed:" + resData);

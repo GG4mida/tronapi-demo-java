@@ -17,6 +17,9 @@ public class Client {
   // 账户调用实例
   public Account account = null;
 
+  // 地址调用实例
+  public Address address = null;
+
   // 订单调用实例
   public Transaction transaction = null;
 
@@ -36,6 +39,7 @@ public class Client {
     }
 
     this.account = new Account(this, publicKey, privateKey);
+    this.address = new Address(this, publicKey, privateKey);
     this.transaction = new Transaction(this, publicKey, privateKey);
   }
 
